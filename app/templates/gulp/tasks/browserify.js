@@ -23,7 +23,9 @@ gulp.task('browserify', bundle)
 function bundle() {
   return bundler.bundle()
   // log errors if they happen
-  .on('error', gutil.log.bind(gutil, gutil.colors.red('Browserify Error')))
+  .on('error', err => {
+    gutil.log(gutil.colors.red('Browserify Error:'), err.toString())
+  })
   .on('end', gutil.log.bind(gutil, gutil.colors.green('Watchify Complete')))
   .pipe(source(config.outputName))
   .pipe(gulp.dest(config.dest))
