@@ -1,6 +1,6 @@
-var dest = './dist';
-var src = './src';
-var gutil = require('gulp-util');
+var dest = './dist'
+var src = '.'
+var gutil = require('gulp-util')
 
 module.exports = {
   server: {
@@ -17,13 +17,19 @@ module.exports = {
     src: src + '/styles/**/*.{sass,scss,css}',
     dest: dest + '/styles',
     settings: {
+      includePaths: [src+'/node_modules/'],
       indentedSyntax: false, // Enable .sass syntax?
       imagePath: '/images' // Used by the image-url helper
     }
   },
   browserify: {
-    settings: {
-      transform: ['babelify', 'reactify']
+    transforms: [
+        {name: 'babelify', opts: { optional: 'es7.decorators'}},
+        {name: 'reactify'},
+    ],
+    options: {
+      paths: ['js/'],
+      extensions: ['.jsx', '.js'],
     },
     src: src + '/js/index.jsx',
     dest: dest + '/js',
@@ -31,11 +37,11 @@ module.exports = {
     debug: gutil.env.type === 'dev'
   },
   html: {
-    src: 'src/index.html',
+    src: src + '/index.html',
     dest: dest
   },
   watch: {
-    src: 'src/**/*.*',
+    src: [src + '/js/**', src + '/styles/**'],
     tasks: ['build']
   }
-};
+}

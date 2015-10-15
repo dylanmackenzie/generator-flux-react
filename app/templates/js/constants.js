@@ -1,16 +1,38 @@
-import keyMirror from 'react/lib/keyMirror';
+const constRegexp = /(\w[a-z]*)([A-Z]+[a-z]*)*/
+function nameToConst(name) {
+  let m = constRegexp.exec(name)
+  if (m == null) {
+    throw new Error("Name must match " + constRegexp.toString())
+  }
 
-export default {
-  // event name triggered from store, listened to by views
-  CHANGE_EVENT: 'change',
+  let i = 1
+  let ret = []
+  for (let part = m[i]; part != null; i++, part = m[i]) {
+    ret.push(part.toUpperCase(), '_')
+  }
 
-  // Each time you add an action, add it here... They should be past-tense
-  ActionTypes: keyMirror({
-    TASK_ADDED: null
-  }),
+  return ret.join('')
+}
 
-  ActionSources: keyMirror({
-    SERVER_ACTION: null,
-    VIEW_ACTION: null
-  })
-};
+function mapEnum(ar, func) {
+  let obj = {}
+  for (let i = 0, len = ar.length; i < len; i++) {
+    obj[func(ar[i])] = i
+  }
+
+  return obj
+}
+
+let sourceNames = [
+  "server",
+  "view"
+]
+
+// Each time you add an action, add it here... They should be past-tense
+let typeNames = [
+  "TaskAdded"
+]
+
+export let CHANGE_EVENT = 'change'
+export let actionSources = mapEnum(sourceNames, nameToConst)
+export let actionTypes = mapEnum(typeNames, nameToConst)

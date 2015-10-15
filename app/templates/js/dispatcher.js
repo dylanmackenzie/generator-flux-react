@@ -1,33 +1,41 @@
-import {Dispatcher} from 'flux';
-import Constants from './Constants';
-import assign from 'object-assign';
+import { Dispatcher } from 'flux';
+import { actionSources } from 'constants';
 
-/**
- * Purpose: to create a single dispatcher instance for use throughout the
- * entire app. The two methods below are merely thin wrappers that describe
- * where the action originated from. Not mandatory, but may be helpful
- **/
-export default assign(new Dispatcher(), {
-
-  /**
-   * This does nothing yet, but will come in handy if you need to respond
-   * to server-originated events and treat them differently...
-   **/
-  handleServerAction(action) {
-    this.dispatch({
-      source: Constants.ActionSources.SERVER_ACTION,
-      action: action
-    });
-  },
-
-  /**
-   * Very thin wrapper around the core dispatcher API, just to signify
-   * that actions triggered here originated on the client-side
-   **/
-  handleViewAction(action) {
-    this.dispatch({
-      source: Constants.ActionSources.VIEW_ACTION,
-      action: action
-    });
+class ExtendedDispatcher extends Dispatcher {
+  constructor() {
+    super()
   }
-});
+
+  dispatch(source, type, data) {
+    if (data == null) {
+      data = type
+      type = source
+      source = actionSources.VIEW
+    }
+
+    this.dispatch({
+      source,
+      type,
+      data,
+    })
+  }
+
+  dispatchFromView(type, data) {
+    this.dispatch({
+      source: actionSources.VIEW,
+      type,
+      data,
+    })
+  }
+
+  dispatchFromServer(type, data) {
+    this.dispatch({
+      source: actionSources.SERVER,
+      type,
+      data,
+    })
+  }
+
+}
+
+export default new ExtendedDispatcher
