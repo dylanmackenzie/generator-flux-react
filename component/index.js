@@ -2,7 +2,7 @@
 let NamedBase = require('yeoman-generator').generators.NamedBase
 
 module.exports = NamedBase.extend({
-  constructor: () => {
+  constructor: function () {
     NamedBase.apply(this, arguments)
   },
 
