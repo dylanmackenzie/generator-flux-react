@@ -1,5 +1,5 @@
-import Dispatcher from 'utils/dispatcher';
-import { actionTypes } from 'utils/constants';
+import Dispatcher from 'utils/dispatcher'
+import { actionTypes } from 'utils/constants'
 
 class <%=name%>ActionCreator {
   constructor() {}

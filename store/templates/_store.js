@@ -1,6 +1,6 @@
-import Dispatcher from 'utils/dispatcher';
-import { actionTypes, actionSources } from 'utils/constants';
-import BaseStore from 'utils/base-store';
+import Dispatcher from 'utils/dispatcher'
+import { actionTypes, actionSources } from 'utils/constants'
+import BaseStore from 'utils/base-store'
 
 function handler(action) { // eslint-disable-line complexity
   switch (action.type) {
@@ -13,9 +13,13 @@ function handler(action) { // eslint-disable-line complexity
 class <%=name%>Store extends BaseStore {
   constructor(handler) {
     super()
-    this.dispatchToken = Dispatcher.register(handler.bind(this))
+    this._dispatchToken = Dispatcher.register(handler.bind(this))
+  }
+
+  dispatchToken() {
+    return this._dispatchToken
   }
 }
 
 
-export default new <%=name%>Store(handler);
+export default new <%=name%>Store(handler)
