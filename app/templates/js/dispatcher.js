@@ -1,5 +1,5 @@
 import { Dispatcher } from 'flux'
-import { actionSources } from 'constants'
+import { actionSources } from 'util/constants'
 
 class ExtendedDispatcher extends Dispatcher {
   constructor() {
@@ -13,7 +13,7 @@ class ExtendedDispatcher extends Dispatcher {
       source = actionSources.VIEW
     }
 
-    this.dispatch({
+    super.dispatch({
       source,
       type,
       data,
