@@ -1,3 +1,4 @@
+'use strict'
 let gulp = require('gulp')
 let config = require('../config')
 

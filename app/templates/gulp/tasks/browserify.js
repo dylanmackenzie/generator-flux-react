@@ -1,3 +1,4 @@
+'use strict'
 let gulp = require('gulp')
 let gutil = require('gulp-util')
 let source = require('vinyl-source-stream')

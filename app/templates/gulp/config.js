@@ -1,3 +1,4 @@
+'use strict'
 let dest = './dist'
 let src = '.'
 let gutil = require('gulp-util')
