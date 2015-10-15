@@ -1,6 +1,6 @@
-var dest = './dist'
-var src = '.'
-var gutil = require('gulp-util')
+let dest = './dist'
+let src = '.'
+let gutil = require('gulp-util')
 
 module.exports = {
   server: {
@@ -9,39 +9,39 @@ module.exports = {
       host: 'localhost',
       port: 8080,
       livereload: {
-        port: 35929
-      }
-    }
+        port: 35929,
+      },
+    },
   },
   sass: {
-    src: src + '/styles/**/*.{sass,scss,css}',
-    dest: dest + '/styles',
+    src: `${src}/styles/**/*.{sass,scss,css}`,
+    dest: `${dest}/styles`,
     settings: {
-      includePaths: [src+'/node_modules/'],
+      includePaths: [`${src}/node_modules/`],
       indentedSyntax: false, // Enable .sass syntax?
-      imagePath: '/images' // Used by the image-url helper
-    }
+      imagePath: '/images', // Used by the image-url helper
+    },
   },
   browserify: {
     transforms: [
-        {name: 'babelify', opts: { optional: 'es7.decorators'}},
-        {name: 'reactify'},
+        { name: 'babelify', opts: { optional: 'es7.decorators' } },
+        { name: 'reactify' },
     ],
     options: {
       paths: ['js/'],
       extensions: ['.jsx', '.js'],
     },
-    src: src + '/js/index.jsx',
-    dest: dest + '/js',
+    src: `${src}/js/index.jsx`,
+    dest: `${dest}/js`,
     outputName: 'index.js',
-    debug: gutil.env.type === 'dev'
+    debug: gutil.env.type === 'dev',
   },
   html: {
-    src: src + '/index.html',
-    dest: dest
+    src: `${src}/index.html`,
+    dest: dest,
   },
   watch: {
-    src: [src + '/js/**', src + '/styles/**'],
-    tasks: ['build']
-  }
+    src: [`${src}/js/**`, `${src}/styles/**`],
+    tasks: ['build'],
+  },
 }

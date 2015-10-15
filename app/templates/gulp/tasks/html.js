@@ -1,8 +1,8 @@
-var gulp = require('gulp')
-var connect = require('gulp-connect')
-var config = require('../config').html
+let gulp = require('gulp')
+let connect = require('gulp-connect')
+let config = require('../config').html
 
-gulp.task('html', function() {
+gulp.task('html', () => {
   return gulp.src(config.src)
     .pipe(gulp.dest(config.dest))
     .pipe(connect.reload())

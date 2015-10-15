@@ -1,11 +1,8 @@
 'use strict'
-let util = require('util')
 let path = require('path')
 let yeoman = require('yeoman-generator')
 let yosay = require('yosay')
-let chalk = require('chalk')
 let slug = require('slug')
-
 
 let FluxGenerator = yeoman.generators.Base.extend({
   askFor: function () {
@@ -18,38 +15,38 @@ let FluxGenerator = yeoman.generators.Base.extend({
       type: 'string',
       name: 'appName',
       message: 'What\'s the name of your application?',
-      default: path.basename(process.env.PWD)
+      default: path.basename(process.env.PWD),
     }, {
       type: 'string',
       name: 'appDesc',
       message: 'Describe your application in one sentence:',
-      default: '...'
+      default: '...',
     }, {
       type: 'list',
       name: 'ui',
       message: 'UI Frameworks',
       choices: [{
         value: 'naked',
-        name: 'None (Vanilla JS/HTML/CSS)'
+        name: 'None (Vanilla JS/HTML/CSS)',
       }, {
         value: 'react-bootstrap',
-        name:'React Bootstrap'
+        name:'React Bootstrap',
       }, {
         value: 'material-ui',
-        name: 'Material UI (experimental beta)'
-      }]
+        name: 'Material UI (experimental beta)',
+      }],
     }]
 
     this.defaultStore = 'default'
     this.defaultActionCreator = 'default'
 
-    this.prompt(prompts, function (props) {
+    this.prompt(prompts, props => {
       this.appName = props.appName
       this.appSlug = slug(props.appName).toLowerCase()
       this.appDesc = props.appDesc
       this.uiChoice = props.ui
       done()
-    }.bind(this))
+    })
   },
 
   app: function () {
@@ -69,8 +66,8 @@ let FluxGenerator = yeoman.generators.Base.extend({
     this.copy('_bower.json', 'bower.json')
   },
 
-  npm: function() {
-    let deps = [ 'react', 'react-dom', 'flux' ]
+  npm: function () {
+    let deps = ['react', 'react-dom', 'flux']
     let devDeps = [
       'eslint', 'babel-eslint', 'eslint-plugin-react', 'gulp-eslint',
       'gulp', 'gulp-connect', 'require-dir', 'vinyl-source-stream',
@@ -79,14 +76,14 @@ let FluxGenerator = yeoman.generators.Base.extend({
     ]
 
     switch (this.uiChoice) {
-      case 'naked':
-        break
-      case 'material-ui':
-        deps.push('material-ui', 'material-ui-sass')
-        // fallthrough
-      default:
-        deps.push(this.uiChoice)
-        break
+    case 'naked':
+      break
+    case 'material-ui':
+      deps.push('material-ui', 'material-ui-sass')
+      // fallthrough
+    default:
+      deps.push(this.uiChoice)
+      break
     }
 
     this.npmInstall(deps, { save: true }, () => {
@@ -94,7 +91,7 @@ let FluxGenerator = yeoman.generators.Base.extend({
     })
   },
 
-  gulp: function() {
+  gulp: function () {
     this.copy('Gulpfile.js', 'Gulpfile.js')
     this.mkdir('gulp')
     this.copy('gulp/config.js', 'gulp/config.js')
@@ -102,9 +99,9 @@ let FluxGenerator = yeoman.generators.Base.extend({
     this.directory('gulp/tasks', 'gulp/tasks')
   },
 
-  ui: function() {
+  ui: function () {
     this.mkdir('styles/')
-    this.directory('styles/'+ this.uiChoice, 'styles/')
+    this.directory(`styles/${this.uiChoice}`, 'styles/')
   },
 
   projectfiles: function () {
@@ -112,9 +109,9 @@ let FluxGenerator = yeoman.generators.Base.extend({
     this.copy('gitignore', '.gitignore')
     this.copy('eslintrc', '.eslintrc')
     this.copy('js/base-store.js', 'js/utils/base-store.js')
-    this.composeWith('flux:store', {args: [this.defaultStore]})
-    this.composeWith('flux:action', {args: [this.defaultActionCreator]})
-  }
+    this.composeWith('flux:store', { args: [this.defaultStore] })
+    this.composeWith('flux:action', { args: [this.defaultActionCreator] })
+  },
 })
 
 module.exports = FluxGenerator

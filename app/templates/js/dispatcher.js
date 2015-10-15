@@ -1,5 +1,5 @@
-import { Dispatcher } from 'flux';
-import { actionSources } from 'constants';
+import { Dispatcher } from 'flux'
+import { actionSources } from 'constants'
 
 class ExtendedDispatcher extends Dispatcher {
   constructor() {

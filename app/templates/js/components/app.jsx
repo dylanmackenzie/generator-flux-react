@@ -1,11 +1,11 @@
-import React from 'react';
-import Store from 'stores/<%= defaultStore %>';
+import React from 'react'
+import Store from 'stores/<%= defaultStore %>'
 
 export default class AppComponent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      world: 'world!'
+      world: 'world!',
     }
   }
 
@@ -14,11 +14,11 @@ export default class AppComponent extends React.Component {
   }
 
   componentDidMount() {
-    Store.addChangeListener(this._onChange);
+    Store.addChangeListener(this._onChange)
   }
 
   componentWillUnmount() {
-    Store.removeChangeListener(this._onChange);
+    Store.removeChangeListener(this._onChange)
   }
 
   render() {

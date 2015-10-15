@@ -2,7 +2,7 @@ const constRegexp = /(\w[a-z]*)([A-Z]+[a-z]*)*/
 function nameToConst(name) {
   let m = constRegexp.exec(name)
   if (m == null) {
-    throw new Error("Name must match " + constRegexp.toString())
+    throw new Error(`Name must match ${constRegexp.toString()}`)
   }
 
   let i = 1
@@ -24,13 +24,13 @@ function mapEnum(ar, func) {
 }
 
 let sourceNames = [
-  "server",
-  "view"
+  'server',
+  'view',
 ]
 
 // Each time you add an action, add it here... They should be past-tense
 let typeNames = [
-  "TaskAdded"
+  'TaskAdded',
 ]
 
 export let CHANGE_EVENT = 'change'
