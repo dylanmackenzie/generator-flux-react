@@ -4,9 +4,9 @@ import BaseStore from 'utils/base-store'
 
 function handler(action) { // eslint-disable-line complexity
   switch (action.type) {
-    case actionTypes.TASK_ADDED:
-      this.emitChange()
-      return
+  case actionTypes.TASK_ADDED:
+    this.emitChange()
+    return
   }
 }
 
