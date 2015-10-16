@@ -1,5 +1,6 @@
 import React from 'react'
 import Store from 'stores/<%= defaultStore %>'
+import autobind from 'autobind-decorator'
 
 export default class AppComponent extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ export default class AppComponent extends React.Component {
     }
   }
 
+  @autobind
   _onChange() {
 
   }
