@@ -67,7 +67,7 @@ let FluxGenerator = yeoman.generators.Base.extend({
   },
 
   npm: function () {
-    let deps = ['react', 'react-dom', 'flux']
+    let deps = ['react', 'react-dom', 'flux', 'classnames']
     let devDeps = [
       'eslint', 'babel-eslint', 'eslint-plugin-react', 'gulp-eslint',
       'gulp', 'gulp-connect', 'require-dir', 'vinyl-source-stream',
