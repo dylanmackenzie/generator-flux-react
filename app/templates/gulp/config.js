@@ -26,7 +26,6 @@ module.exports = {
   browserify: {
     transforms: [
         { name: 'babelify', opts: { optional: 'es7.decorators' } },
-        { name: 'reactify' },
     ],
     options: {
       paths: ['js/'],

@@ -71,7 +71,7 @@ let FluxGenerator = yeoman.generators.Base.extend({
     let devDeps = [
       'eslint', 'babel-eslint', 'eslint-plugin-react', 'gulp-eslint',
       'gulp', 'gulp-connect', 'require-dir', 'vinyl-source-stream',
-      'browserify', 'watchify', 'gulp-util', 'vinyl-buffer', 'reactify',
+      'browserify', 'watchify', 'gulp-util', 'vinyl-buffer',
       'babelify', 'gulp-sass', 'gulp-autoprefixer',
     ]
 
