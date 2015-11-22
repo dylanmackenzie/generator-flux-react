@@ -8,10 +8,7 @@ module.exports = NamedBase.extend({
 
   writing: function () {
     let parts = this.name.split('-')
-    parts.forEach((part, i) => {
-      parts[i][0] = part[0].toUpperCase()
-    })
-
+    parts = parts.map(part => part[0].toUpperCase() + part.slice(1))
     let name = parts.join('')
 
     this.template(
