@@ -2,6 +2,11 @@
 let dest = './dist'
 let src = '.'
 let gutil = require('gulp-util')
+let http = require('http')
+
+const apiPort = 3000
+const apiHost = 'localhost'
+const apiRoot = '/api'
 
 module.exports = {
   server: {
@@ -9,6 +14,7 @@ module.exports = {
       root: dest,
       host: 'localhost',
       port: 8080,
+      fallback: `${src}/index.html`,
       livereload: {
         port: 35929,
       },
@@ -16,7 +22,7 @@ module.exports = {
   },
   sass: {
     src: `${src}/styles/**/*.{sass,scss,css}`,
-    dest: `${dest}/styles`,
+    dest: `${dest}/static/styles`,
     settings: {
       includePaths: [`${src}/node_modules/`],
       indentedSyntax: false, // Enable .sass syntax?
@@ -32,7 +38,7 @@ module.exports = {
       extensions: ['.jsx', '.js'],
     },
     src: `${src}/js/index.jsx`,
-    dest: `${dest}/js`,
+    dest: `${dest}/static/js`,
     outputName: 'index.js',
     debug: gutil.env.type === 'dev',
   },
@@ -40,8 +46,17 @@ module.exports = {
     src: `${src}/index.html`,
     dest: dest,
   },
+  svg: {
+    src: `${src}/static/icons/*.svg`,
+    dest: `${dest}/static/icons`,
+    options: {
+      mode: {
+        symbol: true,
+      },
+    },
+  },
   watch: {
-    src: [`${src}/js/**`, `${src}/styles/**`],
+    src: [`${src}/js/**`, `${src}/styles/**/*.{sass,scss,css}`],
     tasks: ['build'],
   },
 }

@@ -1,24 +1,21 @@
 'use strict'
 let gulp = require('gulp')
 let gutil = require('gulp-util')
-let sass = require('gulp-sass')
 let connect = require('gulp-connect')
-let prefix = require('gulp-autoprefixer')
-let config = require('../config.js').sass
+let svgSprite = require('gulp-svg-sprite')
+let config = require('../config').svg
 
-gulp.task('styles', done => {
+gulp.task('svg', () => {
   return gulp.src(config.src)
-    .pipe(sass(config.settings))
+    .pipe(svgSprite(config.options))
     .on('error', err => {
       // Swallow error if we're building for development
       if (gutil.env.type === 'production') {
         throw err
       } else {
-        gutil.log(gutil.colors.red('Error'), 'in sass file', err.messageFormatted, '\n')
-        done()
+        gutil.log(err)
       }
     })
-    .pipe(prefix())
     .pipe(gulp.dest(config.dest))
     .pipe(connect.reload())
 })

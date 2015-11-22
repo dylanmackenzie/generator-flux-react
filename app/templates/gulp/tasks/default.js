@@ -1,3 +1,3 @@
 'use strict'
 let gulp = require('gulp')
-gulp.task('default', ['build', 'watch', 'server'])
+gulp.task('default', ['watchify', 'build:assets', 'watch', 'server'])

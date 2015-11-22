@@ -18,15 +18,25 @@ bundler.on('update', () => {
   gutil.log(gutil.colors.green('Changes detected, running Watchify'))
 })
 bundler.on('update', bundle)
-gulp.task('browserify', bundle)
+
+gulp.task('watchify', bundle)
+
+gulp.task('browserify', ['watchify'], () => {
+  return bundler.close()
+})
 
 function bundle() {
   return bundler.bundle()
   // log errors if they happen
-  .on('error', err => {
-    gutil.log(gutil.colors.red('Browserify Error:'), err.toString())
-  })
   .on('end', gutil.log.bind(gutil, gutil.colors.green('Watchify Complete')))
+  .on('error', err => {
+    // Swallow error if we're building for development
+    if (gutil.env.type === 'production') {
+      throw err
+    } else {
+      gutil.log(gutil.colors.red('Browserify Error:'), err.toString())
+    }
+  })
   .pipe(source(config.outputName))
   .pipe(gulp.dest(config.dest))
   .pipe(connect.reload())
