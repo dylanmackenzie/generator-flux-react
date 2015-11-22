@@ -13,11 +13,12 @@ function handler(action) { // eslint-disable-line complexity
 class <%=name%>Store extends BaseStore {
   constructor(handler) {
     super()
-    this._dispatchToken = Dispatcher.register(handler.bind(this))
-  }
-
-  dispatchToken() {
-    return this._dispatchToken
+    Object.defineProperty(this, 'dispatchToken', {
+      value: Dispatcher.register(handler.bind(this)),
+      enumerable: true,
+      writable: false,
+      configurable: false,
+    })
   }
 }
 

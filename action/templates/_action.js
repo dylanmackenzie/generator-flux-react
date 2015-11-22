@@ -1,11 +1,11 @@
 import Dispatcher from 'utils/dispatcher'
-import { actionTypes } from 'utils/constants'
+import { actionTypes as actions } from 'utils/constants'
 
 class <%=name%>ActionCreator {
   constructor() {}
 
   addItem(text) {
-    Dispatcher.handleViewAction(actionTypes.TASK_ADDED, { text })
+    Dispatcher.dispatch(actions.ACTION_NAME, { text })
   }
 }
 

@@ -1,7 +1,9 @@
 import React from 'react'
 import Store from 'stores/<%= defaultStore %>'
 import autobind from 'autobind-decorator'
+import handleStoreChange from 'utils/store-change-decorator'
 
+@handleStoreChange(Store)
 export default class AppComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -10,17 +12,13 @@ export default class AppComponent extends React.Component {
     }
   }
 
+  onFluxChange() {
+
+  }
+
   @autobind
   _onChange() {
 
-  }
-
-  componentDidMount() {
-    Store.addChangeListener(this._onChange)
-  }
-
-  componentWillUnmount() {
-    Store.removeChangeListener(this._onChange)
   }
 
   render() {
